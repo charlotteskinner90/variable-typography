@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style/main.css" type="text/css" />
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/headtrackr.js"></script>
+
+    <style>
+      @font-face {
+          font-family: 'Venn';
+          src:  url('Venn-VF.ttf') format('truetype');
+      }
+      div.text1 {
+          direction: ltr;
+          font-family: "Venn";
+          font-size: 50px;
+          font-variation-settings: "wght" 400, "wdth" 100;
+          margin-left:58px;
+      }
+       div.text2 {
+          direction: ltr;
+          font-family: "Venn";
+          font-size: 120px;
+          font-variation-settings: "wght" 400, "wdth" 100;
+          margin-left:58px;
+      }
+      p#demo3{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: dotted 4px white;
+        width: 66%
+      }
+      #inputVideo {
+        float: right;
+      }
+    </style>
+  </head>
+
+<body>
+  <div class="red_box"></div>
+  <div class="background1"></div>
+  <div class="background2"></div>
+
+  <header class="title">
+    <img class="logo" src="images/logo.png" alt="logo">
+  </header>
+
+  <video id="inputVideo" autoplay loop></video>
+
+  <div class="text1" contenteditable="false"><p id="demo1">I'm looking for a job!</p></div>
+  
+  <div class="text1" contenteditable="false"><p id="demo2">I want to be a...</p></div>
+  
+  <div class="text2" contenteditable="true"><p id="demo3">Developer!</p></div>
+
+  <canvas id="inputCanvas" width="320" height="240" style="display:none"></canvas>
+
+<footer class="footer">
+  <div class="ft">
+    <img src="images/location.png" alt="location image">
+      <p class=head><span class="num0">8</span><span class="num1">7</span><span class="num2">2</span><span class="num3">5</span><span class="num4">0</span></p>
+      <p>located in 8 areas</p>
+  </div>
+  <div class="ft">
+      <img src="images/customer.png" alt="customer image">
+      <p class=head>2450</p>
+      <p>happy clients last year</p>
+  </div>
+  <div class="ft">
+      <img src="images/experience.png" alt="shield image">
+      <p class=head>2935</p>
+      <p>years of combined experience</p>
+  </div>
+</footer>
+
+<script type="text/javascript">
+  var videoInput = document.getElementById('inputVideo');
+  var canvasInput = document.getElementById('inputCanvas');
+
+  var htracker = new headtrackr.Tracker();
+  htracker.init(videoInput, canvasInput);
+  htracker.start();
+</script>
+
+<script type="text/javascript">
+	document.addEventListener('facetrackingEvent', function(event) {
+        var faceWidth = event.width;
+        // var faceHeight = event.height;
+        var wght = 1000 - faceWidth*10;
+        var wdth = 125 - faceWidth/8;
+        var settings = "'wght' " + wght + ", 'wdth' " + wdth;
+        // var settings = "'wght' 400" + ", 'wdth' " + wdth;
+        $(demo1).css ('font-variation-settings', settings);
+        $(demo2).css ('font-variation-settings', settings);
+        $(demo3).css ('font-variation-settings', settings);
+        // document.getElementById("demo").style.fontSize = faceWidth*2 + "px";
+        // document.getElementById("demo").font-variation-settings = ""wght"" + faceWidth*10;
+	});
+</script>
+
+
+</body>
+</html>
